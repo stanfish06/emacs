@@ -1,6 +1,32 @@
-(menu-bar-mode 1)
-(scroll-bar-mode -1)
-(tool-bar-mode -1)
+; remove some ui components
+(tool-bar-mode 0)
+(menu-bar-mode 0)
+(scroll-bar-mode 0)
+(global-tab-line-mode 1)
+(setq-default project-mode-line t)
+(setq-default tab-width 4)
+(setq-default indent-tabs-mode nil) ; tab to space
+(setq-default evil-shift-width 4)
+(setq evil-ex-search-smart-case t)
+; make files up-to-date
+(global-auto-revert-mode 1)
+; set this so you dont need to type yes and no
+(defalias 'yes-or-no-p 'y-or-n-p)
+; cursor
+(setq-default cursor-type 'box)
+(blink-cursor-mode 1)
+; window focus
+(keymap-global-set "C-c <right>" 'windmove-right)
+(keymap-global-set "C-c <left>" 'windmove-left)
+(keymap-global-set "C-c <up>" 'windmove-up)
+(keymap-global-set "C-c <down>" 'windmove-down)
+(keymap-global-set "C-c C-l" 'load-file)
+; line number
+(global-display-line-numbers-mode 1)
+(setq display-line-numbers-type 'relative)
+; eshell
+(with-eval-after-load 'em-prompt
+  (set-face-attribute 'eshell-prompt nil :foreground "#8BD5CA"))
 
 (require 'package)
 (package-initialize)
@@ -16,8 +42,35 @@
 (use-package delsel
   :ensure nil
   :hook (after-init . delete-selection-mode))
-
 (use-package magit :ensure t)
+(use-package elisp-autofmt :ensure t)
+; smartparens
+(use-package
+ smartparens
+ :ensure t
+ :config
+ (require 'smartparens-config)
+ (smartparens-global-mode t))
+; git gutter
+(use-package
+ git-gutter
+ :ensure t
+ :hook ((prog-mode org-mode) . git-gutter-mode)
+ :config (setq git-gutter:update-interval 0.02))
+(use-package
+ git-gutter-fringe
+ :ensure t
+ :config
+ (define-fringe-bitmap 'git-gutter-fr:added [224]
+   nil
+   nil
+   '(center repeated))
+ (define-fringe-bitmap 'git-gutter-fr:modified [224]
+   nil
+   nil
+   '(center repeated))
+ (define-fringe-bitmap 'git-gutter-fr:deleted [128 192 224 240]
+   nil nil 'bottom))
 
 (defun prot/keyboard-quit-dwim ()
   "Do-What-I-Mean behaviour for a general `keyboard-quit'.
@@ -52,12 +105,6 @@ The DWIM behaviour of this command is as follows:
   (set-face-attribute 'variable-pitch nil :family proportionately-spaced-font :height 1.0))
 ; theme
 (load-theme 'myDarkTheme t)
-; line number
-(global-display-line-numbers-mode 1)
-(setq display-line-numbers-type 'relative)
-; eshell
-(with-eval-after-load 'em-prompt
-  (set-face-attribute 'eshell-prompt nil :foreground "#8BD5CA"))
 ; mode line
 (defun mode-line-percent-position ()
   "cursor position percentage"
@@ -198,7 +245,9 @@ The DWIM behaviour of this command is as follows:
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(package-selected-packages '(ligature magit)))
+ '(package-selected-packages
+   '(elisp-autofmt git-gutter git-gutter-fringe ligature magit
+                   smartparens)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
