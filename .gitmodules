@@ -1,0 +1,3 @@
+[submodule "emacs-tools"]
+	path = emacs-tools
+	url = git@github.com:stanfish06/emacs-tools.git

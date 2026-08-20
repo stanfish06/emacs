@@ -9,6 +9,7 @@
 ; M-m to jump back to indentation 
 ; Use package-refresh-contents to fetch latest package information
 ; Use C-x o to rotate between windows
+; C-x 0 close window. C-x 1 close all others and keep current window; C-x 4 0 close window and kill buffer
 
 ; remove some ui components
 (tool-bar-mode 0)
@@ -83,6 +84,8 @@
    '(center repeated))
  (define-fringe-bitmap 'git-gutter-fr:deleted [128 192 224 240]
    nil nil 'bottom))
+
+(load (expand-file-name "emacs-tools/init.el" user-emacs-directory))
 
 (defun prot/keyboard-quit-dwim ()
   "Do-What-I-Mean behaviour for a general `keyboard-quit'.
