@@ -1,3 +1,15 @@
+; Window isolate and restore:
+;   1. enable winner mode
+;   2. focus on one window and C-x 1
+;   3. C-c left to undo deletion
+; Use elisp-autofmt to format this file
+; To search marked text, first copy it with C-Spc then M-w or yank, then C-s to search and C-y to paste
+; To set mark, press C-SPC twice (mark + selection then deselect). To set bookmark (similar to mark in vim)
+; To delete words without moving cursor, use M-d. To select forward without moving cursor, C-SPC then C-M-SPC. C-d to delete and forward. M-\ to remove surrounding spaces.
+; M-m to jump back to indentation 
+; Use package-refresh-contents to fetch latest package information
+; Use C-x o to rotate between windows
+
 ; remove some ui components
 (tool-bar-mode 0)
 (menu-bar-mode 0)
@@ -16,10 +28,10 @@
 (setq-default cursor-type 'box)
 (blink-cursor-mode 1)
 ; window focus
-(keymap-global-set "C-c <right>" 'windmove-right)
-(keymap-global-set "C-c <left>" 'windmove-left)
-(keymap-global-set "C-c <up>" 'windmove-up)
-(keymap-global-set "C-c <down>" 'windmove-down)
+(keymap-global-set "C-c l" 'windmove-right)
+(keymap-global-set "C-c h" 'windmove-left)
+(keymap-global-set "C-c k" 'windmove-up)
+(keymap-global-set "C-c j" 'windmove-down)
 (keymap-global-set "C-c C-l" 'load-file)
 ; line number
 (global-display-line-numbers-mode 1)
@@ -254,3 +266,4 @@ The DWIM behaviour of this command is as follows:
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  )
+(put 'upcase-region 'disabled nil)
