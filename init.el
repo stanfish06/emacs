@@ -44,17 +44,20 @@
 (require 'package)
 (package-initialize)
 
-(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
+(add-to-list
+ 'package-archives '("melpa" . "https://melpa.org/packages/"))
 
 ; remove warning messages while installing packages
-(add-to-list 'display-buffer-alist
-             '("\\`\\*\\(Warnings\\|Compile-Log\\)\\*\\'"
-               (display-buffer-no-window)
-               (allow-no-window . t)))
+(add-to-list
+ 'display-buffer-alist
+ '("\\`\\*\\(Warnings\\|Compile-Log\\)\\*\\'"
+   (display-buffer-no-window)
+   (allow-no-window . t)))
 
-(use-package delsel
-  :ensure nil
-  :hook (after-init . delete-selection-mode))
+(use-package
+ delsel
+ :ensure nil
+ :hook (after-init . delete-selection-mode))
 (use-package magit :ensure t)
 (use-package elisp-autofmt :ensure t)
 ; smartparens
@@ -115,9 +118,15 @@ The DWIM behaviour of this command is as follows:
 
 (let ((mono-spaced-font "Iosevka")
       (proportionately-spaced-font "Sans"))
-  (set-face-attribute 'default nil :family mono-spaced-font :height 100)
-  (set-face-attribute 'fixed-pitch nil :family mono-spaced-font :height 1.0)
-  (set-face-attribute 'variable-pitch nil :family proportionately-spaced-font :height 1.0))
+  (set-face-attribute 'default nil
+                      :family mono-spaced-font
+                      :height 100)
+  (set-face-attribute 'fixed-pitch nil
+                      :family mono-spaced-font
+                      :height 1.0)
+  (set-face-attribute 'variable-pitch nil
+                      :family proportionately-spaced-font
+                      :height 1.0))
 ; theme
 (load-theme 'myDarkTheme t)
 ; mode line
@@ -141,7 +150,7 @@ The DWIM behaviour of this command is as follows:
                   :foreground "#F9FAFB"
                   :weight bold))
                 (:propertize "▓▒" face (:foreground "#7E55B3"))
-                              " "
+                " "
                 (:propertize
                  (""
                   mode-line-mule-info
@@ -261,8 +270,8 @@ The DWIM behaviour of this command is as follows:
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
-   '(elisp-autofmt git-gutter git-gutter-fringe ligature magit
-                   smartparens)))
+   '(elisp-autofmt
+     git-gutter git-gutter-fringe ligature magit smartparens)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
