@@ -6,13 +6,47 @@
 ; To search marked text, first copy it with C-Spc then M-w or yank, then C-s to search and C-y to paste
 ; To set mark, press C-SPC twice (mark + selection then deselect). To set bookmark (similar to mark in vim)
 ; To delete words without moving cursor, use M-d. To select forward without moving cursor, C-SPC then C-M-SPC. C-d to delete and forward. M-\ to remove surrounding spaces.
-; M-m to jump back to indentation 
+; M-m to jump back to indentation
 ; Use package-refresh-contents to fetch latest package information
 ; Use C-x o to rotate between windows
 ; C-x 0 close window. C-x 1 close all others and keep current window; C-x 4 0 close window and kill buffer
 ; C-a C-o mimics vim O; C-e RET mimics vim o
 ; C-x SPC rectangular mark mode
 
+; introduced in emacs31, good preset
+(load-theme 'newcomers-presets)
+(use-package
+ completion-preview
+ :ensure nil
+ :demand t
+ :bind
+ (:map
+  completion-preview-active-mode-map
+  ("M-i" . completion-preview-insert-word)
+  ("M-n" . completion-preview-next-candidate)
+  ("M-p" . completion-preview-prev-candidate)
+  ("M-<return>" . completion-preview-insert)
+  ("<tab>" . completion-preview-complete))
+ :config
+ (setq completion-preview-minimum-symbol-length 2)
+ (global-completion-preview-mode 1))
+(use-package
+ minibuffer
+ :ensure nil
+ :demand t
+ :bind
+ (:map
+  completion-in-region-mode-map
+  ("M-i" . minibuffer-choose-completion)
+  ("M-n" . minibuffer-next-completion)
+  ("M-p" . minibuffer-previous-completion))
+ :config
+ (setq completions-format 'one-column)
+ (setq completions-max-height 12)
+ (setq completion-auto-help t)
+ (setq completion-auto-select nil)
+ (setq minibuffer-visible-completions t)
+ (setq completion-eager-update t))
 ; remove some ui components
 (tool-bar-mode 0)
 (menu-bar-mode 0)
@@ -195,85 +229,12 @@ The DWIM behaviour of this command is as follows:
                 (:eval
                  (propertize " %l:%c " 'face 'cursor-position-face))
                 (:propertize "▓" face (:foreground "#B8C0E0"))))
-; ligature
-(use-package
- ligature
- :ensure t
- :config
- (ligature-set-ligatures
-  't
-  '("<|"
-    "|>"
-    "<|>"
-    "||"
-    "|="
-    "||-"
-    "-|"
-    "-||"
-    "=="
-    "!="
-    "<="
-    ">="
-    "==="
-    "!=="
-    "=!="
-    "<==>"
-    "==>"
-    "<===>"
-    "===>"
-    "<=>"
-    "<=="
-    "=="
-    "->"
-    "<-"
-    "<-->"
-    "-->"
-    "<--->"
-    "--->"
-    "<->"
-    "<--"
-    "--"
-    ".."
-    "..."
-    "..<"
-    "::"
-    ":::"
-    ":="
-    ":<"
-    "!!"
-    "?:"
-    "??"
-    "?."
-    "?="
-    "?!"
-    "<>"
-    "<<"
-    ">>"
-    "<<<"
-    ">>>"
-    "<->"
-    "<=>"
-    "<!--"
-    "&&"
-    "||"
-    ":="
-    "^="
-    "++"
-    "--"
-    "+>"
-    "<+"
-    "+++"
-    "--+"
-    "+++"))
- (global-ligature-mode t))
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(package-selected-packages
-   '(elisp-autofmt
-     git-gutter git-gutter-fringe ligature magit smartparens)))
+ '(package-selected-packages nil))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
