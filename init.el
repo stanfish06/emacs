@@ -124,6 +124,20 @@
  (define-fringe-bitmap 'git-gutter-fr:deleted [128 192 224 240]
    nil nil 'bottom))
 
+(use-package elfeed :ensure t)
+
+(use-package
+ elfeed-protocol
+ :ensure t
+ :after elfeed
+ :demand t
+ :custom (elfeed-protocol-enabled-protocols '(fever))
+ (elfeed-feeds
+  '(("fever+http://stan@localhost:8080"
+     :api-url "http://localhost:8080/fever/"
+     :password "111111")))
+ :config (elfeed-protocol-enable))
+
 (load (expand-file-name "emacs-tools/init.el" user-emacs-directory))
 
 (defun prot/keyboard-quit-dwim ()
@@ -234,7 +248,14 @@ The DWIM behaviour of this command is as follows:
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(package-selected-packages nil))
+ '(package-selected-packages
+   '(##
+     elfeed
+     elisp-autofmt
+     git-gutter-fringe
+     ligature
+     magit
+     smartparens)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
