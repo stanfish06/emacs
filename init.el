@@ -131,11 +131,11 @@
  :ensure t
  :after elfeed
  :demand t
- :custom (elfeed-protocol-enabled-protocols '(fever))
+ :custom (elfeed-protocol-enabled-protocols '(miniflux))
  (elfeed-feeds
-  '(("fever+http://stan@localhost:8080"
-     :api-url "http://localhost:8080/fever/"
-     :password "111111")))
+  '(("miniflux+http://stan@localhost:8080"
+     :api-key
+     "721192ed89718b462635137dabbe071a68fd0e384217013032c97d232e8f2daf")))
  :config (elfeed-protocol-enable))
 
 (load (expand-file-name "emacs-tools/init.el" user-emacs-directory))
