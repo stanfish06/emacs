@@ -14,7 +14,7 @@
 ; C-x SPC rectangular mark mode
 
 ; introduced in emacs31, good preset
-(load-theme 'newcomers-presets)
+(ignore-errors (load-theme 'newcomers-presets))
 (use-package
  completion-preview
  :ensure nil
@@ -248,14 +248,7 @@ The DWIM behaviour of this command is as follows:
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(package-selected-packages
-   '(##
-     elfeed
-     elisp-autofmt
-     git-gutter-fringe
-     ligature
-     magit
-     smartparens)))
+ '(package-selected-packages nil))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
