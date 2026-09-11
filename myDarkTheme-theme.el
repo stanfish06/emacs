@@ -141,13 +141,17 @@
 
                           `(mode-line
                             ((t
-                              (:foreground
+                              (:family
+                               "DejaVu Sans Mono"
+                               :foreground
                                ,fg
                                :background ,gray12
                                :box nil))))
                           `(mode-line-inactive
                             ((t
-                              (:foreground
+                              (:family
+                               "DejaVu Sans Mono"
+                               :foreground
                                ,gray16
                                :background ,gray10
                                :box nil))))

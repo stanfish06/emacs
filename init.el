@@ -14,7 +14,8 @@
 ; C-x SPC rectangular mark mode
 
 ; introduced in emacs31, good preset
-(ignore-errors (load-theme 'newcomers-presets))
+(ignore-errors
+  (load-theme 'newcomers-presets))
 (use-package
  completion-preview
  :ensure nil
@@ -166,19 +167,29 @@ The DWIM behaviour of this command is as follows:
 
 (define-key global-map (kbd "C-g") #'prot/keyboard-quit-dwim)
 
-(let ((mono-spaced-font "Iosevka")
+; theme
+(load-theme 'myDarkTheme t)
+(let ((mono-spaced-font "Berkeley Mono")
+      (fallback-font "Iosevka")
       (proportionately-spaced-font "Sans"))
-  (set-face-attribute 'default nil
-                      :family mono-spaced-font
-                      :height 100)
+  (setq use-default-font-for-symbols nil)
+  (set-face-attribute 'default nil :family mono-spaced-font)
   (set-face-attribute 'fixed-pitch nil
                       :family mono-spaced-font
                       :height 1.0)
   (set-face-attribute 'variable-pitch nil
                       :family proportionately-spaced-font
-                      :height 1.0))
-; theme
-(load-theme 'myDarkTheme t)
+                      :height 1.0)
+  (set-fontset-font t nil (font-spec :family fallback-font)
+                    nil
+                    'prepend)
+  (dolist (face
+           '(mode-line
+             mode-line-inactive
+             mode-line-buffer-id
+             mode-line-emphasis
+             mode-line-highlight))
+    (set-face-attribute face nil :family "DejaVu Sans Mono")))
 ; mode line
 (defun mode-line-percent-position ()
   "cursor position percentage"
@@ -189,7 +200,10 @@ The DWIM behaviour of this command is as follows:
               (/ (float (- (point) (point-min)))
                  (max 1 (- (point-max) (point-min))))))))
 (defface cursor-position-face
-  '((t :background "#B8C0E0" :foreground "black"))
+  '((t
+     :family "DejaVu Sans Mono"
+     :background "#B8C0E0"
+     :foreground "black"))
   "cursor position face")
 (setq-default mode-line-format
               '((:propertize "▓" face (:foreground "#7E55B3"))
