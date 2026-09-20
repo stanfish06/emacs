@@ -188,8 +188,10 @@ The DWIM behaviour of this command is as follows:
              mode-line-inactive
              mode-line-buffer-id
              mode-line-emphasis
-             mode-line-highlight))
-    (set-face-attribute face nil :family "DejaVu Sans Mono")))
+             mode-line-highlight
+             line-number
+             line-number-current-line))
+    (set-face-attribute face nil :family "Maple Mono NF")))
 ; mode line
 (defun mode-line-percent-position ()
   "cursor position percentage"
