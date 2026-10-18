@@ -103,13 +103,6 @@
  :hook (after-init . delete-selection-mode))
 (use-package magit :ensure t)
 (use-package elisp-autofmt :ensure t)
-; smartparens
-(use-package
- smartparens
- :ensure t
- :config
- (require 'smartparens-config)
- (smartparens-global-mode t))
 ; git gutter
 (use-package
  git-gutter
