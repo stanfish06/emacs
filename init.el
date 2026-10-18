@@ -12,6 +12,7 @@
 ; C-x 0 close window. C-x 1 close all others and keep current window; C-x 4 0 close window and kill buffer
 ; C-a C-o mimics vim O; C-e RET mimics vim o
 ; C-x SPC rectangular mark mode
+; undo-redo C-?
 
 ; introduced in emacs31, good preset
 (ignore-errors
@@ -48,6 +49,11 @@
  (setq completion-auto-select nil)
  (setq minibuffer-visible-completions t)
  (setq completion-eager-update t))
+
+; completion
+; M-/ for dabbrev-expand, C-M-/ for debbrev-completion (interactive)
+(keymap-global-set "C-M-;" 'comint-dynamic-complete-filename) ; press this twice will pop minibuf, if not unique
+
 ; remove some ui components
 (tool-bar-mode 0)
 (menu-bar-mode 0)
@@ -168,8 +174,21 @@ The DWIM behaviour of this command is as follows:
 (define-key global-map (kbd "C-g") #'prot/keyboard-quit-dwim)
 
 ; theme
-(load-theme 'myDarkTheme t)
-(let ((mono-spaced-font "Berkeley Mono")
+(use-package
+ dark-theme
+ :vc
+ (:url
+  "git@github.com:stanfish06/dark-theme.git"
+  :lisp-dir "emacs"
+  :main-file "dark-default-theme.el"
+  :rev :newest)
+ :no-require t
+ :config
+ (add-to-list
+  'custom-theme-load-path
+  (file-name-directory (locate-library "dark-colors")))
+ (load-theme 'dark-default t))
+(let ((mono-spaced-font "BerkeleyMono Nerd Font")
       (fallback-font "Iosevka")
       (proportionately-spaced-font "Sans"))
   (setq use-default-font-for-symbols nil)
