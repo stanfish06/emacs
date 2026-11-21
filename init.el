@@ -103,6 +103,7 @@
  :hook (after-init . delete-selection-mode))
 (use-package magit :ensure t)
 (use-package elisp-autofmt :ensure t)
+(use-package vterm :ensure t)
 ; git gutter
 (use-package
  git-gutter
